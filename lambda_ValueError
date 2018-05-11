@@ -1,0 +1,25 @@
+Error =ValueError: ('The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().', 'occurred at index 0')
+###################################################
+Error Code=
+def count_delay(date1, date2):
+        if date1 - date2 > duration:
+            return 'delay'
+        elif date1 - date2 <= duration:
+            return 'on_time'
+        else:
+            return 'unpaid'
+            
+df['credit_paid_status'] = df.apply(lambda row: count_delay(df['CC_Payment_Date'], df['CC_Due_Date']), axis = 1)
+####################################################
+Correct Code
+def count_delay(date1, date2):
+        if date1 - date2 > duration:
+            return 'delay'
+        elif date1 - date2 <= duration:
+            return 'on_time'
+        else:
+            return 'unpaid'
+            
+df['credit_paid_status'] = df.apply(lambda row: count_delay(row['CC_Payment_Date'], row['CC_Due_Date']), axis = 1)
+Problem is that we pass 'df' in function but we must pass 'row' then we not get error
+
